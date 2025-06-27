@@ -1,0 +1,52 @@
+min_version = "2024.9.5"
+
+[env]
+# Use the project name derived from the current directory
+PROJECT_NAME = "{{ config_root | basename }}"
+PROJECT_VERSION = "{{ get_env(name='PROJECT_VERSION') }}"
+
+# Automatic virtualenv activation
+_.python.venv = { path = ".venv", create = true }
+
+[tools]
+python = "{{ get_env(name='PYTHON_VERSION', default='3.9') }}"
+ruff = "latest"
+uv = "latest"
+
+[hooks]
+postinstall = "uv sync --all-extras --all-groups"
+
+[tasks.install]
+description = "Install dependencies"
+alias = "i"
+run = "uv sync --all-extras --all-groups"
+
+[tasks.lint]
+description = "Lint the code"
+run = "ruff check src/"
+
+[tasks.format]
+description = "Format the code"
+run = "ruff format src/"
+
+[tasks.test]
+description = "Run tests"
+run = "uv run pytest tests/"
+
+[tasks.run]
+description = "Run the application"
+run = "uv run micoo version"
+
+[tasks.ci]
+description = "Run CI checks"
+depends = ["lint", "format", "test", "run"]
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Virtual Environment: $VIRTUAL_ENV"
+echo "Project Version: $PROJECT_VERSION"
+echo "VCS Tag:"
+git describe --tags --abbrev=0 || echo "No tags found"
+'''
