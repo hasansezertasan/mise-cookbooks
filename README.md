@@ -1,16 +1,12 @@
-# Mise Cookbooks :cookbook:
+# Mise Cookbooks :cook:
 
 Several [mise](https://github.com/jdx/mise) setups that I find useful. :sparkles:
 
 ## Usage :hammer_and_wrench:
 
-### Haters gonna hate but still useful :sunglasses:
+### Use the `micoo` CLI :rocket:
 
-Just copy and paste the contents of the technology-specific `.mise.toml` file into your own `mise.toml` file. :clipboard:
-
-### Use the `mico` CLI :rocket:
-
-You can use the `mico` CLI to interact with the cookbooks.
+You can use the `micoo` CLI to interact with the cookbooks.
 
 List all available cookbooks:
 
@@ -23,6 +19,10 @@ Dump a specific cookbook to your `mise.toml` file:
 ```shell
 mise exec pipx:micoo -- micoo dump <cookbook_name> > mise.toml
 ```
+
+### Haters gonna hate but still useful :sunglasses:
+
+Just copy and paste the contents of the technology-specific `.mise.toml` file into your own `mise.toml` file. :clipboard:
 
 ## Cookbooks :books:
 
@@ -40,3 +40,7 @@ mise exec pipx:micoo -- micoo dump <cookbook_name> > mise.toml
 ### Community Cookbooks :handshake:
 
 - [opentofu](./opentofu.mise.toml) :seedling: — A cookbook for managing Terraform configurations using OpenTofu.
+
+## Contributing :heart:
+
+If you have a useful cookbook that you would like to share, please start a [discussion](https://github.com/hasansezertasan/mise-cookbooks/discussions) or open a pull request. :octocat:
