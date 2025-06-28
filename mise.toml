@@ -1,0 +1,16 @@
+[tools]
+taplo = { version = "latest", matching = "full" }
+
+
+[tasks.lint]
+description = "Lint the project files"
+run = "taplo lint ."
+
+
+[tasks.format]
+description = "Format the project files"
+run = "taplo format ."
+
+[tasks.ci]
+description = "Run CI tasks"
+depends = ["lint", "format"]
