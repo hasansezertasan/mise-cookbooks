@@ -1,16 +1,102 @@
 [tools]
-taplo = { version = "latest", matching = "full" }
+action-validator = "latest"
+actionlint = "latest"
+taplo = "latest"
+typos = "latest"
+yamlfmt = "latest"
+yamllint = "latest"
+hk = "latest"
+pkl = "latest"
+"ubi:akiomik/mado" = "latest"
+shfmt = "latest"
+editorconfig-checker = "latest"
+dprint = "latest"
+markdownlint-cli2 = "latest"
 
 
-[tasks.lint]
-description = "Lint the project files"
+[hooks]
+preinstall = "echo 'I am about to install tool(s)'"
+
+
+[tasks."check:editorconfig-checker"]
+description = "Run editorconfig-checker"
+hide = true
+run = "ec --color ."
+
+
+[tasks."check:gha"]
+description = "Run action-validator"
+hide = true
+run = "action-validator"
+
+
+[tasks."check:typos"]
+description = "Run typos"
+hide = true
+run = "typos ."
+
+
+[tasks.check]
+description = "Run all checks"
+depends = ["check:editorconfig-checker", "check:gha", "check:typos"]
+
+
+[tasks."lint:yaml"]
+description = "Run yamllint"
+hide = true
+run = "yamllint ."
+
+
+[tasks."lint:gha"]
+description = "Run actionlint"
+hide = true
+run = "actionlint"
+
+
+[tasks."lint:markdownlint-cli2"]
+description = "Run markdownlint-cli2"
+hide = true
+run = "markdownlint-cli2 ."
+
+
+[tasks."lint:toml"]
+description = "Run taplo"
+hide = true
 run = "taplo lint ."
 
 
-[tasks.format]
-description = "Format the project files"
+[tasks.lint]
+description = "Linting"
+depends = ["lint:yaml", "lint:gha", "lint:markdownlint-cli2", "lint:toml"]
+
+
+[tasks."format:self"]
+description = "Run mise format"
+hide = true
+run = "mise fmt"
+
+
+[tasks."format:yaml"]
+description = "Run yamlfmt formatter"
+hide = true
+run = "yamlfmt ."
+
+
+[tasks."format:taplo"]
+description = "Run taplo formatter"
+hide = true
 run = "taplo format ."
 
+
+[tasks.format]
+description = "Run the formatters"
+depends = ["format:self", "format:yaml", "format:taplo"]
+
+
 [tasks.ci]
-description = "Run CI tasks"
-depends = ["lint", "format"]
+description = "Run the CI tasks"
+depends = ["check", "lint", "format"]
+
+[tasks.pre-commit]
+description = "Run pre-commit hooks"
+run = "echo Running pre-commit hooks..."

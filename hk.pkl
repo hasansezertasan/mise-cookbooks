@@ -1,0 +1,40 @@
+amends "package://github.com/jdx/hk/releases/download/v1.1.2/hk@1.1.2#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.1.2/hk@1.1.2#/Builtins.pkl"
+
+hooks {
+    ["pre-commit"] {
+        fix = true    // automatically modify files with available linter fixes
+        stash = "git" // stashes unstaged changes while running fix steps
+        steps {
+            ["ci"] {
+                check = "mise run ci"
+                exclusive = true // ensures that the step runs in isolation
+            }
+        }
+    }
+    ["pre-push"] {
+        steps {
+            ["ci"] {
+                check = "mise run ci"
+                exclusive = true // ensures that the step runs in isolation
+            }
+        }
+    }
+    ["fix"] {
+        fix = true
+        steps {
+            ["ci"] {
+                check = "mise run ci"
+                exclusive = true // ensures that the step runs in isolation
+            }
+        }
+    }
+    ["check"] {
+        steps {
+            ["ci"] {
+                check = "mise run ci"
+                exclusive = true // ensures that the step runs in isolation
+            }
+        }
+    }
+}
