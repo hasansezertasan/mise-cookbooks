@@ -1,0 +1,68 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+DJANGO_SETTINGS_MODULE = "{{ config_root | basename }}.settings"
+
+# Automatic virtualenv activation
+_.python.venv = { path = ".venv", create = true }
+
+[tools]
+python = "{{ get_env(name='PYTHON_VERSION', default='3.11') }}"
+ruff = "latest"
+
+[tasks.install]
+description = "Install dependencies"
+alias = "i"
+run = "uv pip install -r requirements.txt"
+
+[tasks.server]
+description = "Run the development server"
+alias = "s"
+run = "python manage.py runserver"
+
+[tasks.migrate]
+description = "Run database migrations"
+alias = "m"
+run = "python manage.py migrate"
+
+[tasks.makemigrations]
+description = "Create new migrations"
+alias = "mm"
+run = "python manage.py makemigrations"
+
+[tasks.shell]
+description = "Open Django shell"
+run = "python manage.py shell"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "python manage.py test"
+
+[tasks.lint]
+description = "Lint the code"
+alias = "l"
+run = "ruff check ."
+
+[tasks.format]
+description = "Format the code"
+alias = "f"
+run = "ruff format ."
+
+[tasks.collectstatic]
+description = "Collect static files"
+run = "python manage.py collectstatic --noinput"
+
+[tasks.createsuperuser]
+description = "Create a superuser"
+run = "python manage.py createsuperuser"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Settings: $DJANGO_SETTINGS_MODULE"
+echo "Virtual Environment: $VIRTUAL_ENV"
+python -c "import django; print(f'Django: {django.VERSION}')"
+'''

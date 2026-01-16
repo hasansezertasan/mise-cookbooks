@@ -1,0 +1,53 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+DENO_DIR = ".deno"
+
+[tools]
+deno = "{{ get_env(name='DENO_VERSION', default='latest') }}"
+
+[tasks.run]
+description = "Run the application"
+alias = "r"
+run = "deno run main.ts"
+
+[tasks.dev]
+description = "Run the application with watch mode"
+alias = "d"
+run = "deno run --watch main.ts"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "deno test"
+
+[tasks.lint]
+description = "Lint the code"
+alias = "l"
+run = "deno lint"
+
+[tasks.format]
+description = "Format the code"
+alias = "f"
+run = "deno fmt"
+
+[tasks.check]
+description = "Type-check the code"
+alias = "c"
+run = "deno check main.ts"
+
+[tasks.compile]
+description = "Compile to a standalone executable"
+run = "deno compile main.ts"
+
+[tasks.cache]
+description = "Cache dependencies"
+run = "deno cache deps.ts"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Deno: $(deno --version | head -1)"
+'''
