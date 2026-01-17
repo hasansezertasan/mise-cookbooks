@@ -42,6 +42,14 @@ description = "Lint the code"
 alias = "l"
 run = "golangci-lint run"
 
+[tasks.vet]
+description = "Run go vet for static analysis"
+run = "go vet ./..."
+
+[tasks.ci]
+description = "Run all checks (lint, vet, test)"
+depends = ["lint", "vet", "test"]
+
 [tasks.format]
 description = "Format the code"
 alias = "f"

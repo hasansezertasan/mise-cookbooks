@@ -46,6 +46,23 @@ description = "Test notebooks with nbval (requires pytest and nbval in requireme
 alias = "t"
 run = "pytest --nbval $NOTEBOOKS_DIR/"
 
+[tasks.lint]
+description = "Lint Python files"
+run = "ruff check ."
+
+[tasks.format]
+description = "Format Python files"
+alias = "f"
+run = "ruff format ."
+
+[tasks.execute]
+description = "Execute all notebooks (for CI)"
+run = "jupyter nbconvert --execute --inplace $NOTEBOOKS_DIR/*.ipynb"
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
+
 [tasks.info]
 description = "Print project information"
 run = '''

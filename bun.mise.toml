@@ -33,14 +33,38 @@ alias = "b"
 run = "bun build $ENTRY_FILE --outdir=dist"
 
 [tasks.lint]
-description = "Lint the code (requires eslint in dependencies)"
+description = "Lint the code (run: bun add -d eslint)"
 alias = "l"
 run = "bun run eslint ."
 
 [tasks.format]
-description = "Format the code (requires prettier in dependencies)"
+description = "Format the code (run: bun add -d prettier)"
 alias = "f"
 run = "bun run prettier --write ."
+
+# Alternative: Use Biome instead of eslint+prettier (faster, single tool)
+# [tasks.lint]
+# description = "Lint the code with Biome (run: bun add -d @biomejs/biome)"
+# alias = "l"
+# run = "bun run biome lint ."
+#
+# [tasks.format]
+# description = "Format the code with Biome"
+# alias = "f"
+# run = "bun run biome format --write ."
+#
+# [tasks.check]
+# description = "Lint and format with Biome"
+# alias = "c"
+# run = "bun run biome check --write ."
+
+[tasks.typecheck]
+description = "Type-check TypeScript (run: bun add -d typescript)"
+run = "bun run tsc --noEmit"
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
 
 [tasks.clean]
 description = "Clean build artifacts and dependencies"

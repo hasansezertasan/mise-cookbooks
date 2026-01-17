@@ -26,10 +26,19 @@ description = "Run tests"
 alias = "t"
 run = "zig build test"
 
+[tasks.lint]
+description = "Check code for compilation errors"
+alias = "l"
+run = "zig build --summary all 2>&1 | head -50"
+
 [tasks.format]
 description = "Format the code"
 alias = "f"
 run = "zig fmt ."
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
 
 [tasks.clean]
 description = "Clean build artifacts"

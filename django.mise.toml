@@ -51,6 +51,15 @@ description = "Format the code"
 alias = "f"
 run = "ruff format ."
 
+[tasks.check]
+description = "Run Django system checks"
+alias = "c"
+run = "python manage.py check"
+
+[tasks.ci]
+description = "Run all checks (lint, check, test)"
+depends = ["lint", "check", "test"]
+
 [tasks.collectstatic]
 description = "Collect static files"
 run = "python manage.py collectstatic --noinput"

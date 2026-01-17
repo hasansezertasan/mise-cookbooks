@@ -46,6 +46,18 @@ run = "deno compile $ENTRY_FILE"
 description = "Cache dependencies (uses deno.json imports)"
 run = "deno cache $ENTRY_FILE"
 
+[tasks.bench]
+description = "Run benchmarks"
+run = "deno bench"
+
+[tasks.doc]
+description = "Generate documentation"
+run = "deno doc $ENTRY_FILE"
+
+[tasks.ci]
+description = "Run all checks (lint, check, test)"
+depends = ["lint", "check", "test"]
+
 [tasks.info]
 description = "Print project information"
 run = '''

@@ -49,8 +49,12 @@ alias = "f"
 run = "ruff format ."
 
 [tasks.openapi]
-description = "Export OpenAPI schema"
+description = "Export OpenAPI schema (assumes app.main:app structure)"
 run = "python -c \"from app.main import app; import json; print(json.dumps(app.openapi(), indent=2))\" > openapi.json"
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
 
 [tasks.info]
 description = "Print project information"

@@ -31,6 +31,14 @@ description = "Lint the code with Clippy"
 alias = "l"
 run = "cargo clippy"
 
+[tasks."test:coverage"]
+description = "Run tests with coverage (run: cargo install cargo-tarpaulin)"
+run = "cargo tarpaulin"
+
+[tasks.ci]
+description = "Run all checks (check, lint, test)"
+depends = ["check", "lint", "test"]
+
 [tasks.format]
 description = "Format the code"
 alias = "f"
