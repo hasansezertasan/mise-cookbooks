@@ -40,6 +40,15 @@ Just copy and paste the contents of the technology-specific `.mise.toml` file in
 ### Community Cookbooks :handshake:
 
 - [opentofu](./opentofu.mise.toml) :seedling: — A cookbook for managing Terraform configurations using OpenTofu.
+- [Go](./go.mise.toml) :rocket: — A cookbook for managing Go projects with golangci-lint.
+- [Rust](./rust.mise.toml) :crab: — A cookbook for managing Rust projects with Cargo and Clippy.
+- [Zig](./zig.mise.toml) :high_voltage: — A cookbook for managing Zig projects with the Zig build system.
+- [Django](./django.mise.toml) :snake: — A cookbook for managing Django web applications.
+- [Deno](./deno.mise.toml) :sauropod: — A cookbook for managing Deno projects with built-in tooling.
+- [Jupyter](./jupyter.mise.toml) :notebook: — A cookbook for managing Jupyter notebooks and data science workflows.
+- [Bun](./bun.mise.toml) :bread: — A cookbook for managing Bun projects with built-in bundler and test runner.
+- [FastAPI](./fastapi.mise.toml) :zap: — A cookbook for managing FastAPI applications with uvicorn.
+- [Flask](./flask.mise.toml) :coffee: — A cookbook for managing Flask web applications.
 
 ## Contributing :heart:
 

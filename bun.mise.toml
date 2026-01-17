@@ -1,0 +1,79 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+ENTRY_FILE = "index.ts"
+
+[tools]
+bun = "{{ get_env(name='BUN_VERSION', default='latest') }}"
+
+[tasks.install]
+description = "Install dependencies"
+alias = "i"
+run = "bun install"
+
+[tasks.run]
+description = "Run the application"
+alias = "r"
+run = "bun run $ENTRY_FILE"
+
+[tasks.dev]
+description = "Run the application with watch mode"
+alias = "d"
+run = "bun --watch run $ENTRY_FILE"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "bun test"
+
+[tasks.build]
+description = "Build the application"
+alias = "b"
+run = "bun build $ENTRY_FILE --outdir=dist"
+
+[tasks.lint]
+description = "Lint the code (run: bun add -d eslint)"
+alias = "l"
+run = "bun run eslint ."
+
+[tasks.format]
+description = "Format the code (run: bun add -d prettier)"
+alias = "f"
+run = "bun run prettier --write ."
+
+# Alternative: Use Biome instead of eslint+prettier (faster, single tool)
+# [tasks.lint]
+# description = "Lint the code with Biome (run: bun add -d @biomejs/biome)"
+# alias = "l"
+# run = "bun run biome lint ."
+#
+# [tasks.format]
+# description = "Format the code with Biome"
+# alias = "f"
+# run = "bun run biome format --write ."
+#
+# [tasks.check]
+# description = "Lint and format with Biome"
+# alias = "c"
+# run = "bun run biome check --write ."
+
+[tasks.typecheck]
+description = "Type-check TypeScript (run: bun add -d typescript)"
+run = "bun run tsc --noEmit"
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
+
+[tasks.clean]
+description = "Clean build artifacts and dependencies"
+alias = "c"
+run = "rm -rf dist node_modules bun.lockb"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Bun: $(bun --version)"
+'''

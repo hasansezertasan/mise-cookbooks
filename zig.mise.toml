@@ -1,0 +1,53 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+ZIG_LOCAL_CACHE_DIR = ".zig-cache"
+
+[tools]
+zig = "{{ get_env(name='ZIG_VERSION', default='0.13') }}"
+
+[tasks.build]
+description = "Build the project"
+alias = "b"
+run = "zig build"
+
+[tasks."build:release"]
+description = "Build the project with release optimizations"
+run = "zig build -Doptimize=ReleaseFast"
+
+[tasks.run]
+description = "Build and run the application"
+alias = "r"
+run = "zig build run"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "zig build test"
+
+[tasks.lint]
+description = "Check code for compilation errors"
+alias = "l"
+run = "zig build --summary all 2>&1 | head -50"
+
+[tasks.format]
+description = "Format the code"
+alias = "f"
+run = "zig fmt ."
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
+
+[tasks.clean]
+description = "Clean build artifacts"
+alias = "c"
+run = "rm -rf zig-out .zig-cache"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Zig: $(zig version)"
+'''

@@ -1,0 +1,66 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+RUST_BACKTRACE = "1"
+
+[tools]
+rust = "{{ get_env(name='RUST_VERSION', default='stable') }}"
+
+[tasks.build]
+description = "Build the project"
+alias = "b"
+run = "cargo build"
+
+[tasks."build:release"]
+description = "Build the project with optimizations"
+run = "cargo build --release"
+
+[tasks.run]
+description = "Run the application"
+alias = "r"
+run = "cargo run"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "cargo test"
+
+[tasks.lint]
+description = "Lint the code with Clippy"
+alias = "l"
+run = "cargo clippy"
+
+[tasks."test:coverage"]
+description = "Run tests with coverage (run: cargo install cargo-tarpaulin)"
+run = "cargo tarpaulin"
+
+[tasks.ci]
+description = "Run all checks (check, lint, test)"
+depends = ["check", "lint", "test"]
+
+[tasks.format]
+description = "Format the code"
+alias = "f"
+run = "cargo fmt"
+
+[tasks.check]
+description = "Check the project for errors"
+alias = "c"
+run = "cargo check"
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = "cargo clean"
+
+[tasks.doc]
+description = "Generate and open documentation"
+run = "cargo doc --open"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Rust: $(rustc --version)"
+echo "Cargo: $(cargo --version)"
+'''

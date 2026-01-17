@@ -1,0 +1,74 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+JUPYTER_CONFIG_DIR = ".jupyter"
+NOTEBOOKS_DIR = "notebooks"
+
+# Automatic virtualenv activation
+_.python.venv = { path = ".venv", create = true }
+
+[tools]
+python = "{{ get_env(name='PYTHON_VERSION', default='3.11') }}"
+uv = "latest"
+ruff = "latest"
+
+[tasks.install]
+description = "Install dependencies"
+alias = "i"
+run = "uv pip install -r requirements.txt"
+
+[tasks.lab]
+description = "Start Jupyter Lab"
+alias = "l"
+run = "jupyter lab"
+
+[tasks.notebook]
+description = "Start Jupyter Notebook"
+alias = "n"
+run = "jupyter notebook"
+
+[tasks.kernel]
+description = "Install project kernel"
+run = "python -m ipykernel install --user --name=$PROJECT_NAME"
+
+[tasks.convert]
+description = "Convert notebooks to HTML"
+run = "jupyter nbconvert --to html $NOTEBOOKS_DIR/*.ipynb"
+
+[tasks.clean]
+description = "Clear notebook outputs"
+alias = "c"
+run = "jupyter nbconvert --clear-output --inplace $NOTEBOOKS_DIR/*.ipynb"
+
+[tasks.test]
+description = "Test notebooks with nbval (requires pytest and nbval in requirements.txt)"
+alias = "t"
+run = "pytest --nbval $NOTEBOOKS_DIR/"
+
+[tasks.lint]
+description = "Lint Python files"
+run = "ruff check ."
+
+[tasks.format]
+description = "Format Python files"
+alias = "f"
+run = "ruff format ."
+
+[tasks.execute]
+description = "Execute all notebooks (for CI)"
+run = "jupyter nbconvert --execute --inplace $NOTEBOOKS_DIR/*.ipynb"
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Virtual Environment: $VIRTUAL_ENV"
+jupyter --version
+echo "Available Kernels:"
+jupyter kernelspec list
+'''

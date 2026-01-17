@@ -1,0 +1,73 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+BUILD_DIR = "bin"
+CGO_ENABLED = "0"
+
+[tools]
+go = "{{ get_env(name='GO_VERSION', default='1.22') }}"
+golangci-lint = "latest"
+
+[tasks.install]
+description = "Download module dependencies"
+alias = "i"
+run = "go mod download"
+
+[tasks.build]
+description = "Build the application"
+alias = "b"
+run = "go build -o $BUILD_DIR/$PROJECT_NAME ."
+
+[tasks."build:release"]
+description = "Build the application with optimizations"
+run = "go build -ldflags='-s -w' -o $BUILD_DIR/$PROJECT_NAME ."
+
+[tasks.run]
+description = "Run the application"
+alias = "r"
+run = "go run ."
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "go test ./..."
+
+[tasks."test:coverage"]
+description = "Run tests with coverage"
+run = "go test -cover ./..."
+
+[tasks.lint]
+description = "Lint the code"
+alias = "l"
+run = "golangci-lint run"
+
+[tasks.vet]
+description = "Run go vet for static analysis"
+run = "go vet ./..."
+
+[tasks.ci]
+description = "Run all checks (lint, vet, test)"
+depends = ["lint", "vet", "test"]
+
+[tasks.format]
+description = "Format the code"
+alias = "f"
+run = "go fmt ./..."
+
+[tasks.tidy]
+description = "Tidy module dependencies"
+run = "go mod tidy"
+
+[tasks.clean]
+description = "Clean build artifacts"
+alias = "c"
+run = "rm -rf \"$BUILD_DIR\""
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Go Version: $(go version)"
+echo "Module: $(go list -m)"
+'''
