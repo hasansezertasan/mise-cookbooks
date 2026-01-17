@@ -29,7 +29,7 @@ run = "zig build test"
 [tasks.format]
 description = "Format the code"
 alias = "f"
-run = "zig fmt src/"
+run = "zig fmt ."
 
 [tasks.clean]
 description = "Clean build artifacts"

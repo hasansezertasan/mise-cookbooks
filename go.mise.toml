@@ -17,11 +17,11 @@ run = "go mod download"
 [tasks.build]
 description = "Build the application"
 alias = "b"
-run = "go build -o $BUILD_DIR/$PROJECT_NAME ./..."
+run = "go build -o $BUILD_DIR/$PROJECT_NAME ."
 
 [tasks."build:release"]
 description = "Build the application with optimizations"
-run = "go build -ldflags='-s -w' -o $BUILD_DIR/$PROJECT_NAME ./..."
+run = "go build -ldflags='-s -w' -o $BUILD_DIR/$PROJECT_NAME ."
 
 [tasks.run]
 description = "Run the application"
@@ -54,7 +54,7 @@ run = "go mod tidy"
 [tasks.clean]
 description = "Clean build artifacts"
 alias = "c"
-run = "rm -rf $BUILD_DIR"
+run = "rm -rf \"$BUILD_DIR\""
 
 [tasks.info]
 description = "Print project information"

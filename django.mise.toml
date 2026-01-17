@@ -9,6 +9,7 @@ _.python.venv = { path = ".venv", create = true }
 
 [tools]
 python = "{{ get_env(name='PYTHON_VERSION', default='3.11') }}"
+uv = "latest"
 ruff = "latest"
 
 [tasks.install]
@@ -64,5 +65,5 @@ run = '''
 echo "Project: $PROJECT_NAME"
 echo "Settings: $DJANGO_SETTINGS_MODULE"
 echo "Virtual Environment: $VIRTUAL_ENV"
-python -c "import django; print(f'Django: {django.VERSION}')"
+python -c "import django; print(f'Django: {django.get_version()}')"
 '''

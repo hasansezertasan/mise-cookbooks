@@ -3,12 +3,14 @@ min_version = "2024.9.5"
 [env]
 PROJECT_NAME = "{{ config_root | basename }}"
 JUPYTER_CONFIG_DIR = ".jupyter"
+NOTEBOOKS_DIR = "notebooks"
 
 # Automatic virtualenv activation
 _.python.venv = { path = ".venv", create = true }
 
 [tools]
 python = "{{ get_env(name='PYTHON_VERSION', default='3.11') }}"
+uv = "latest"
 ruff = "latest"
 
 [tasks.install]
@@ -32,17 +34,17 @@ run = "python -m ipykernel install --user --name=$PROJECT_NAME"
 
 [tasks.convert]
 description = "Convert notebooks to HTML"
-run = "jupyter nbconvert --to html notebooks/*.ipynb"
+run = "jupyter nbconvert --to html $NOTEBOOKS_DIR/*.ipynb"
 
 [tasks.clean]
 description = "Clear notebook outputs"
 alias = "c"
-run = "jupyter nbconvert --clear-output --inplace notebooks/*.ipynb"
+run = "jupyter nbconvert --clear-output --inplace $NOTEBOOKS_DIR/*.ipynb"
 
 [tasks.test]
-description = "Test notebooks with nbval"
+description = "Test notebooks with nbval (requires pytest and nbval in requirements.txt)"
 alias = "t"
-run = "pytest --nbval notebooks/"
+run = "pytest --nbval $NOTEBOOKS_DIR/"
 
 [tasks.info]
 description = "Print project information"
