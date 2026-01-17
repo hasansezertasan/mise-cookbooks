@@ -46,6 +46,9 @@ Just copy and paste the contents of the technology-specific `.mise.toml` file in
 - [Django](./django.mise.toml) :snake: — A cookbook for managing Django web applications.
 - [Deno](./deno.mise.toml) :sauropod: — A cookbook for managing Deno projects with built-in tooling.
 - [Jupyter](./jupyter.mise.toml) :notebook: — A cookbook for managing Jupyter notebooks and data science workflows.
+- [Bun](./bun.mise.toml) :bread: — A cookbook for managing Bun projects with built-in bundler and test runner.
+- [FastAPI](./fastapi.mise.toml) :zap: — A cookbook for managing FastAPI applications with uvicorn.
+- [Flask](./flask.mise.toml) :coffee: — A cookbook for managing Flask web applications.
 
 ## Contributing :heart:
 

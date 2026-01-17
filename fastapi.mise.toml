@@ -1,0 +1,62 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+APP_MODULE = "app.main:app"
+HOST = "127.0.0.1"
+PORT = "8000"
+
+# Automatic virtualenv activation
+_.python.venv = { path = ".venv", create = true }
+
+[tools]
+python = "{{ get_env(name='PYTHON_VERSION', default='3.11') }}"
+uv = "latest"
+ruff = "latest"
+
+[tasks.install]
+description = "Install dependencies"
+alias = "i"
+run = "uv pip install -r requirements.txt"
+
+[tasks.server]
+description = "Run the development server with auto-reload"
+alias = "s"
+run = "uvicorn $APP_MODULE --host $HOST --port $PORT --reload"
+
+[tasks.run]
+description = "Run the production server"
+alias = "r"
+run = "uvicorn $APP_MODULE --host $HOST --port $PORT"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "pytest tests/"
+
+[tasks."test:coverage"]
+description = "Run tests with coverage"
+run = "pytest tests/ --cov=app --cov-report=html"
+
+[tasks.lint]
+description = "Lint the code"
+alias = "l"
+run = "ruff check ."
+
+[tasks.format]
+description = "Format the code"
+alias = "f"
+run = "ruff format ."
+
+[tasks.openapi]
+description = "Export OpenAPI schema"
+run = "python -c \"from app.main import app; import json; print(json.dumps(app.openapi(), indent=2))\" > openapi.json"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Virtual Environment: $VIRTUAL_ENV"
+echo "Python: $(python --version)"
+python -c "import fastapi; print(f'FastAPI: {fastapi.__version__}')" 2>/dev/null || echo "FastAPI: not installed"
+'''

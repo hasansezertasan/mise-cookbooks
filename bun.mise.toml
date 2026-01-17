@@ -1,0 +1,55 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+ENTRY_FILE = "index.ts"
+
+[tools]
+bun = "{{ get_env(name='BUN_VERSION', default='latest') }}"
+
+[tasks.install]
+description = "Install dependencies"
+alias = "i"
+run = "bun install"
+
+[tasks.run]
+description = "Run the application"
+alias = "r"
+run = "bun run $ENTRY_FILE"
+
+[tasks.dev]
+description = "Run the application with watch mode"
+alias = "d"
+run = "bun --watch run $ENTRY_FILE"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "bun test"
+
+[tasks.build]
+description = "Build the application"
+alias = "b"
+run = "bun build $ENTRY_FILE --outdir=dist"
+
+[tasks.lint]
+description = "Lint the code (requires eslint in dependencies)"
+alias = "l"
+run = "bun run eslint ."
+
+[tasks.format]
+description = "Format the code (requires prettier in dependencies)"
+alias = "f"
+run = "bun run prettier --write ."
+
+[tasks.clean]
+description = "Clean build artifacts and dependencies"
+alias = "c"
+run = "rm -rf dist node_modules bun.lockb"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Bun: $(bun --version)"
+'''
