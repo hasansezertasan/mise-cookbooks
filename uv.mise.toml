@@ -1,0 +1,54 @@
+min_version = "2024.9.5"
+
+[env]
+# Automatic virtualenv activation
+_.python.venv = { path = ".venv", create = true }
+
+# Use the project name derived from the current directory
+PROJECT_NAME = "{{ config_root | basename }}"
+ENVIRONMENT = "{{ env.ENVIRONMENT | default(value='development') }}"
+
+
+[tools]
+python = "{{ get_env(name='PYTHON_VERSION', default='3.11') }}"
+ruff = "latest"
+
+[hooks]
+postinstall = "uv sync"
+
+[tasks.install]
+description = "Install Dependencies"
+alias = "i"
+run = "uv sync --no-editable --no-install-project"
+sources = ['pyproject.toml', 'mise.toml']
+outputs = ['uv.lock']
+
+[tasks.run]
+description = "Run the application"
+run = "uv run app.py"
+
+[tasks.test]
+description = "Run tests"
+run = "uv run pytest tests/"
+
+[tasks.lint]
+description = "Lint the code"
+run = "uv run ruff check src/"
+
+[tasks.format]
+description = "Format the code"
+run = "uv run ruff format src/"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+if [ "$ENVIRONMENT" = "production" ]; then
+    echo "Warning: Running in production environment!"
+fi
+echo "Environment: $ENVIRONMENT"
+echo "Virtual Environment: $VIRTUAL_ENV"
+'''
+
+[settings.pipx]
+uvx = true
