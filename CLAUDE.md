@@ -18,6 +18,7 @@ mise run format    # Run mise fmt, yamlfmt, taplo format
 ```
 
 Individual checks:
+
 ```shell
 mise run check:typos              # Spell check
 mise run lint:yaml                # YAML linting
@@ -29,6 +30,7 @@ mise run lint:gha                 # GitHub Actions linting
 ## Git Hooks
 
 This repo uses [hk](https://github.com/jdx/hk) for git hooks (configured in `hk.pkl`):
+
 - `pre-commit`: Runs `mise run ci` with auto-fix enabled
 - `pre-push`: Runs `mise run ci`
 
@@ -48,7 +50,7 @@ Each cookbook (`*.mise.toml`) follows a consistent pattern:
 ### Cookbook Categories
 
 | Type | Files |
-|------|-------|
+| --- | --- |
 | Official (from mise docs) | `terraform`, `cpp`, `node`, `pnpm`, `python`, `ruby-on-rails` |
 | Community | `opentofu`, `go`, `rust`, `zig`, `django`, `deno`, `jupyter`, `bun`, `fastapi`, `flask` |
 
