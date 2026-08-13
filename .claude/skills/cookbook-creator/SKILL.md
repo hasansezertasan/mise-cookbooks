@@ -150,4 +150,7 @@ sub-items on one line), and indent any wrapped continuation lines to 4 spaces.
     aliases, env vars, and `info` output style.
 - **Don't over-scope.** The common task set covers most needs. Add specials only
     when they're genuinely idiomatic for the technology (a `migrate` for a web
-    framework, `doc` for Rust). Resist inventing tasks nobody would run.
+    framework, `doc` for Rust). Resist inventing tasks nobody would run. The same
+    restraint applies to `[env]`: don't set a variable the tool manages on its own
+    (e.g. `MIX_ENV`, `RAILS_ENV`, `NODE_ENV`) — a needless env var can silently
+    break `test`/`ci` by overriding the environment the tool would have picked.

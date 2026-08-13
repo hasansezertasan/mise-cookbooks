@@ -56,6 +56,14 @@ like `pnpm` — omit it; that's fine for those, but new ones should include it.)
     `_.python.venv = { path = ".venv", create = true }`.
 - Put executables on PATH with `_.path` when a tool installs binaries into the
     project (`_.path = ['{{config_root}}/node_modules/.bin']`, or a gemset `bin`).
+- **Don't export a variable the tool manages itself.** Some frameworks pick their
+    environment automatically and only respect an override if you *set* one —
+    e.g. Mix runs `mix test` in `:test` unless `MIX_ENV` is already exported, so
+    hardcoding `MIX_ENV = "…default(value='dev')"` silently forces tests to run in
+    `:dev`. The same trap applies to `RAILS_ENV`, `NODE_ENV`, `PYTHON_ENV`, etc.
+    Only add an env var the tasks genuinely need; when in doubt, leave the tool to
+    manage its own environment. A superfluous env var isn't neutral — it can
+    actively break `test`/`ci`.
 
 ### `[tools]`
 
