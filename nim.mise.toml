@@ -38,7 +38,8 @@ run = "nimble check"
 [tasks.format]
 description = "Format the code with nimpretty"
 alias = "f"
-run = "nimpretty src/*.nim"
+# nimpretty takes a single input file, so format each source independently.
+run = 'find src -type f -name "*.nim" -exec nimpretty {} \;'
 
 [tasks.ci]
 description = "Run all checks (check, build, test)"
