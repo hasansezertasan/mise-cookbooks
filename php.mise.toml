@@ -1,0 +1,57 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+HOST = "127.0.0.1"
+PORT = "8000"
+DOCROOT = "public"
+
+[tools]
+php = "{{ get_env(name='PHP_VERSION', default='8.3') }}"
+mago = "latest"
+
+[tasks.install]
+description = "Install dependencies with Composer"
+alias = "i"
+run = "composer install"
+
+[tasks.update]
+description = "Update dependencies with Composer"
+run = "composer update"
+
+[tasks.server]
+description = "Run the built-in development server"
+alias = "s"
+run = "php -S $HOST:$PORT -t $DOCROOT"
+
+[tasks.test]
+description = "Run tests (Composer test script)"
+alias = "t"
+run = "composer test"
+
+[tasks.lint]
+description = "Lint the code with Mago"
+alias = "l"
+run = "mago lint"
+
+[tasks.format]
+description = "Format the code with Mago"
+alias = "f"
+run = "mago format"
+
+[tasks.analyze]
+description = "Run static analysis with Mago"
+alias = "a"
+run = "mago analyze"
+
+[tasks.ci]
+description = "Run all checks (lint, analyze, test)"
+depends = ["lint", "analyze", "test"]
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "PHP: $(php --version | head -n 1)"
+composer --version 2>/dev/null || echo "Composer: not installed"
+'''

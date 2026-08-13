@@ -52,7 +52,7 @@ Each cookbook (`*.mise.toml`) follows a consistent pattern:
 | Type | Files |
 | --- | --- |
 | Official (from mise docs) | `terraform`, `cpp`, `node`, `pnpm`, `python`, `ruby-on-rails` |
-| Community | `opentofu`, `go`, `rust`, `zig`, `django`, `deno`, `jupyter`, `bun`, `fastapi`, `flask`, `litestar` |
+| Community | `opentofu`, `go`, `rust`, `zig`, `django`, `deno`, `jupyter`, `bun`, `fastapi`, `flask`, `litestar`, `php` |
 
 ### Usage via cobo CLI
 
