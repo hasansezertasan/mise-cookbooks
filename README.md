@@ -54,6 +54,7 @@ Just copy and paste the contents of the technology-specific `.mise.toml` file in
 - [Flask](./flask.mise.toml) :coffee: — A cookbook for managing Flask web applications.
 - [Litestar](./litestar.mise.toml) :star2: — A cookbook for managing Litestar applications with the Litestar CLI.
 - [PHP](./php.mise.toml) :elephant: — A cookbook for managing PHP projects with Composer and Mago.
+- [Nim](./nim.mise.toml) :lemon: — A cookbook for managing Nim projects with Nimble.
 
 ## Contributing :heart:
 
