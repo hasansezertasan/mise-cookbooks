@@ -56,6 +56,7 @@ Just copy and paste the contents of the technology-specific `.mise.toml` file in
 - [PHP](./php.mise.toml) :elephant: — A cookbook for managing PHP projects with Composer and Mago.
 - [Nim](./nim.mise.toml) :lemon: — A cookbook for managing Nim projects with Nimble.
 - [Ruby Gemset](./ruby-gemset.mise.toml) :gem: — A cookbook for RVM-style, project-local gemset isolation in Ruby projects.
+- [Elixir](./elixir.mise.toml) :droplet: — A cookbook for managing Elixir projects with Mix and Credo.
 
 ## Contributing :heart:
 
