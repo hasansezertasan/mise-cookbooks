@@ -1,4 +1,6 @@
-min_version = "2024.9.5"
+# min_version 2025.2.5 is required for `outputs = { auto = true }`, which lets
+# mise skip build/test/lint tasks when none of their Go sources have changed.
+min_version = "2025.2.5"
 
 [env]
 PROJECT_NAME = "{{ config_root | basename }}"
@@ -18,20 +20,33 @@ run = "go mod download"
 description = "Build the application"
 alias = "b"
 run = "go build -o $BUILD_DIR/$PROJECT_NAME ."
+sources = ["go.mod", "go.sum", "**/*.go"]
+outputs = { auto = true }
 
 [tasks."build:release"]
 description = "Build the application with optimizations"
 run = "go build -ldflags='-s -w' -o $BUILD_DIR/$PROJECT_NAME ."
+sources = ["go.mod", "go.sum", "**/*.go"]
+outputs = { auto = true }
 
 [tasks.run]
 description = "Run the application"
 alias = "r"
 run = "go run ."
 
+[tasks.generate]
+description = "Run go:generate directives"
+alias = "g"
+run = "go generate ./..."
+sources = ["go.mod", "go.sum", "**/*.go"]
+outputs = { auto = true }
+
 [tasks.test]
 description = "Run tests"
 alias = "t"
-run = "go test ./..."
+run = "go test -shuffle=on ./..."
+sources = ["go.mod", "go.sum", "**/*.go"]
+outputs = { auto = true }
 
 [tasks."test:coverage"]
 description = "Run tests with coverage"
@@ -41,14 +56,31 @@ run = "go test -cover ./..."
 description = "Lint the code"
 alias = "l"
 run = "golangci-lint run"
+sources = ["go.mod", "go.sum", "**/*.go"]
+outputs = { auto = true }
+
+[tasks.fix]
+description = "Fix as many lint errors as possible"
+run = "golangci-lint run --fix"
 
 [tasks.vet]
 description = "Run go vet for static analysis"
 run = "go vet ./..."
+sources = ["go.mod", "go.sum", "**/*.go"]
+outputs = { auto = true }
+
+[tasks."mod:check"]
+description = "Verify modules are downloaded, tidy, and reproducible"
+run = [
+  "go mod verify",
+  "go mod download",
+  "go mod tidy",
+  "git diff --exit-code -- go.mod go.sum",
+]
 
 [tasks.ci]
-description = "Run all checks (lint, vet, test)"
-depends = ["lint", "vet", "test"]
+description = "Run all checks (mod:check, lint, vet, test)"
+depends = ["mod:check", "lint", "vet", "test"]
 
 [tasks.format]
 description = "Format the code"
