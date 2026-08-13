@@ -16,6 +16,9 @@ description = "Download module dependencies"
 alias = "i"
 run = "go mod download"
 
+# If your build embeds non-Go assets via `//go:embed`, add their globs to
+# `sources` below (e.g. "templates/**/*") so a changed asset invalidates the
+# cache and triggers a rebuild.
 [tasks.build]
 description = "Build the application"
 alias = "b"
@@ -75,7 +78,11 @@ run = [
   "go mod verify",
   "go mod download",
   "go mod tidy",
+  # Fail on modified tracked files (diff) and on untracked go.mod/go.sum
+  # (e.g. a go.sum created by `go mod tidy` but never committed, which a
+  # plain `git diff` would silently ignore).
   "git diff --exit-code -- go.mod go.sum",
+  "test -z \"$(git ls-files --others --exclude-standard -- go.mod go.sum)\"",
 ]
 
 [tasks.ci]
