@@ -14,10 +14,15 @@ min_version = "2024.9.5"
 # Project information
 PROJECT_NAME = "{{ config_root | basename }}"
 
-# Gems live under `.gems/<active-ruby-version>` so switching Ruby versions
-# never mixes incompatible native extensions. `gem install` and `bundle install`
-# create this directory automatically on first use.
-GEM_HOME = "{{ config_root }}/.gems/{{ exec(command='mise tool ruby --active') }}"
+# Gems live under `.gems/<ruby-version>` so switching Ruby versions never mixes
+# incompatible native extensions. `gem install` and `bundle install` create this
+# directory automatically on first use.
+#
+# The version keys off the same RUBY_VERSION spec used for the `ruby` tool below.
+# Do not derive it by shelling out to mise here (e.g. `mise tool ruby --active`):
+# that would spawn a child mise that reloads this same config and re-evaluates
+# this expression, recursing indefinitely.
+GEM_HOME = "{{ config_root }}/.gems/{{ get_env(name='RUBY_VERSION', default='3.3.3') }}"
 GEM_PATH = "{{ env.GEM_HOME }}"
 
 # Expose gem-installed executables (rubocop, rspec, ...) on PATH.
