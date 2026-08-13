@@ -45,6 +45,12 @@ description = "Build the project"
 alias = "b"
 run = "npm run build"
 
+[tasks.nr]
+description = "Run any package.json script, e.g. `mise nr lint`"
+usage = 'arg "<script>" help="package.json script name"'
+run = 'node --run "$usage_script"'
+depends = ["install"]
+
 [tasks.info]
 description = "Print project information"
 run = '''
