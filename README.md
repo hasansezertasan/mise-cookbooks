@@ -14,11 +14,14 @@ List all available cookbooks:
 mise exec pipx:cobo -- cobo mise list
 ```
 
-Dump a specific cookbook to your `mise.toml` file:
+Dump a specific cookbook to a file:
 
 ```shell
-mise exec pipx:cobo -- cobo mise dump <cookbook_name> > mise.toml
+mise exec pipx:cobo -- cobo mise dump <cookbook_name> > mise.local.toml
 ```
+
+> [!NOTE]
+> Redirecting to `mise.local.toml` avoids truncating an existing `mise.toml`.
 
 ### Haters gonna hate but still useful :sunglasses:
 

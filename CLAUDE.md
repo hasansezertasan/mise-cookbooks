@@ -58,7 +58,7 @@ Each cookbook (`*.mise.toml`) follows a consistent pattern:
 
 ```shell
 mise exec pipx:cobo -- cobo mise list                    # List cookbooks
-mise exec pipx:cobo -- cobo mise dump <name> > mise.toml # Export cookbook
+mise exec pipx:cobo -- cobo mise dump <name> > mise.local.toml # Export cookbook (avoid clobbering mise.toml)
 ```
 
 ## File Conventions
