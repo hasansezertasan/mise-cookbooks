@@ -58,4 +58,4 @@ Just copy and paste the contents of the technology-specific `.mise.toml` file in
 
 ## Contributing :heart:
 
-If you have a useful cookbook that you would like to share, please start a [discussion](https://github.com/hasansezertasan/mise-cookbooks/discussions) or open a pull request. :octocat:
+If you have a useful cookbook that you would like to share, please start a [discussion](https://github.com/hasansezertasan/mise-cookbooks/discussions) or open a pull request. :octocat: See [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for dev setup and git hooks.
