@@ -1,0 +1,57 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+
+[tools]
+"asdf:https://github.com/asdf-community/asdf-nim" = "{{ get_env(name='NIM_VERSION', default='latest') }}"
+
+[tasks.install]
+description = "Install dependencies with Nimble"
+alias = "i"
+run = "nimble install --depsOnly -y"
+
+[tasks.build]
+description = "Build the project"
+alias = "b"
+run = "nimble build"
+
+[tasks."build:release"]
+description = "Build the project with release optimizations"
+run = "nimble build -d:release"
+
+[tasks.run]
+description = "Build and run the application"
+alias = "r"
+run = "nimble run"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "nimble test"
+
+[tasks.check]
+description = "Validate the package"
+alias = "c"
+run = "nimble check"
+
+[tasks.format]
+description = "Format the code with nimpretty"
+alias = "f"
+run = "nimpretty src/*.nim"
+
+[tasks.ci]
+description = "Run all checks (check, build, test)"
+depends = ["check", "build", "test"]
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = "rm -rf nimcache"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Nim: $(nim --version | head -n 1)"
+echo "Nimble: $(nimble --version | head -n 1)"
+'''
