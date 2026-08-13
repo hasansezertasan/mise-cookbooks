@@ -44,7 +44,7 @@ depends = ["check:editorconfig-checker", "check:gha", "check:typos"]
 [tasks."lint:yaml"]
 description = "Run yamllint"
 hide = true
-run = "yamllint ."
+run = "yamllint -c .config/.yamllint.yaml ."
 
 
 [tasks."lint:gha"]
@@ -56,7 +56,7 @@ run = "actionlint"
 [tasks."lint:markdownlint-cli2"]
 description = "Run markdownlint-cli2"
 hide = true
-run = "markdownlint-cli2 ."
+run = "markdownlint-cli2 --config .config/.markdownlint-cli2.yaml ."
 
 
 [tasks."lint:toml"]
@@ -79,7 +79,7 @@ run = "mise fmt"
 [tasks."format:yaml"]
 description = "Run yamlfmt formatter"
 hide = true
-run = "yamlfmt ."
+run = "yamlfmt -conf .config/.yamlfmt.yml ."
 
 
 [tasks."format:taplo"]
