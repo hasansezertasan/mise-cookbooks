@@ -1,0 +1,13 @@
+# AI-Rulez Configuration
+# Single source of truth for agent skills/rules across many AI coding tools.
+# Edit content under .ai-rulez/; run `ai-rulez generate` to emit per-tool files.
+# Docs: https://github.com/Goldziher/ai-rulez
+
+version = "4.0"
+name = "mise-cookbooks"
+description = "Cross-agent skills and rules for the mise-cookbooks repo"
+
+# Which AI tools to generate native config for.
+# Built-ins include: claude, cursor, windsurf, copilot, gemini, cline,
+# continue-dev, junie, codex, opencode, amp, and more.
+presets = ["claude", "codex", "opencode", "cursor", "copilot", "gemini"]
