@@ -22,3 +22,13 @@ hk install
 - `pre-push`: `mise run ci`
 
 Run `mise run ci` anytime to check + lint + format.
+
+## Agent skills
+
+This repo ships a `cookbook-creator` skill under `.claude/skills/` to help agents
+scaffold new cookbooks. That format is currently **Claude Code-specific**.
+
+If you use another AI coding agent (Codex, opencode, Cursor, Copilot, Gemini,
+...), the repository conventions live in [`AGENTS.md`](../AGENTS.md) (mirrored by
+`CLAUDE.md`), which most agents read. You can also follow the skill's guidance
+directly by reading `.claude/skills/cookbook-creator/SKILL.md`.
