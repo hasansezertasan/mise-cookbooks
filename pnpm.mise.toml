@@ -1,5 +1,5 @@
 [tools]
-node = '22'
+node = '24'
 
 [hooks]
 # Enabling corepack will install the `pnpm` package manager specified in your package.json
@@ -11,7 +11,7 @@ postinstall = 'npx corepack enable'
 experimental = true
 
 [env]
-_.path = ['./node_modules/.bin']
+_.path = ['{{config_root}}/node_modules/.bin']
 
 [tasks.pnpm-install]
 description = 'Installs dependencies with pnpm'
