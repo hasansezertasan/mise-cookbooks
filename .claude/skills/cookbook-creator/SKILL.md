@@ -39,19 +39,24 @@ Before writing anything, pin down the facts. You need:
     tool is a first-class mise plugin — some come via `pipx:`, `npm:`, `cargo:`,
     `aqua:`, or `ubi:` backends. Verify before you commit to a name.
 - **The genuine commands** for install, run/build, test, lint, and format. When
-    unsure, consult the technology's official docs (use the context7 MCP or a web
-    search — don't rely on memory for CLI flags, they drift between versions).
+    unsure, consult the technology's official docs — a web search, or any docs/MCP
+    tooling available in your session (e.g. a context7 server if one is
+    connected). Don't rely on memory for CLI flags; they drift between versions.
 - **The idiomatic linter/formatter, and how it's delivered.** Most ecosystems
     have a canonical choice (Go → golangci-lint + `go fmt`, Rust → clippy +
     `cargo fmt`, Python → ruff, Ruby → rubocop, Elixir → credo, Crystal → ameba,
-    JS/TS → eslint + prettier). Prefer it over exotic alternatives. Crucially,
-    decide **where it comes from**: only tools that have a mise backend go in
-    `[tools]`. Many idiomatic linters ship through the language's own package
-    manager instead (credo via Hex, ameba via shards, eslint/prettier via npm) and
-    have no mise entry at all — those are installed by the `install` task and
-    invoked directly in `lint`/`format`, with the project's bin dir put on PATH via
-    `_.path` (see how `ruby-on-rails` runs rubocop and `node` uses
-    `node_modules/.bin`). Don't force a package-delivered linter into `[tools]`.
+    JS/TS → eslint + prettier). Prefer it over exotic alternatives. Then decide
+    **where it comes from** — two valid patterns, so mirror the closest sibling
+    cookbook. Put it **in `[tools]`** if mise can install it, which means a
+    registry name *or* an explicit backend spec: `node.mise.toml` pins
+    `"npm:eslint"` and `"npm:typescript"` that way, and `cargo:`, `pipx:`,
+    `aqua:`, `ubi:` work the same. Keep it **out of `[tools]`** when the linter is
+    just another manifest dependency (credo in `mix.exs`, ameba in `shard.yml`) or
+    you'd rather run it from the project's own `node_modules`; then the `install`
+    task pulls it in and `lint`/`format` call it directly, with its bin dir on PATH
+    via `_.path` (see how `ruby-on-rails` runs rubocop). A missing `mise registry`
+    entry alone doesn't force this second route — check whether a backend can
+    install it first.
 
 If the target is a **framework** rather than a bare language (FastAPI, Django,
 Rails, Litestar), find the framework's own dev-server / management commands and
@@ -82,10 +87,13 @@ Follow the repo's exact conventions. The essentials, in order:
 1. `min_version = "2024.9.5"` (unless copying an official cookbook that omits it).
 2. `[env]` — always define `PROJECT_NAME = "{{ config_root | basename }}"`;
     add framework/tool env vars (host, port, app module, build dir) as needed.
-3. `[tools]` — pin the runtime with the env-override pattern
-    `tool = "{{ get_env(name='FOO_VERSION', default='X.Y') }}"`; add *mise-backed*
-    linting/helper tools as `"latest"`. Linters delivered by the language's
-    package manager don't belong here (see step 1).
+3. `[tools]` — pin the runtime with an env-overridable default, using whichever
+    form the closest sibling cookbook uses:
+    `tool = "{{ get_env(name='FOO_VERSION', default='X.Y') }}"` or the equivalent
+    `tool = "{{ env['FOO_VERSION'] | default(value='X.Y') }}"` (as `node` does).
+    Add helper tools mise can install as `"latest"` — including explicit backend
+    specs like `"npm:eslint"`. Only deps the language's own package manager
+    resolves from its manifest (credo, ameba) stay out (see step 1).
 4. `[tasks.*]` — each task has `description`, an `alias` where there's an obvious
     short form (`i` `b` `r` `t` `l` `f` `c`), and `run`. The `ci` task uses
     `depends = [...]`, not `run` — usually `["lint", "test"]`; fold in a

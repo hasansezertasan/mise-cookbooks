@@ -15,7 +15,9 @@ scratch.
 
 ## File skeleton
 
-Every cookbook follows this top-to-bottom order:
+Community cookbooks follow this top-to-bottom order. (The official cookbooks
+copied verbatim from mise's docs — notably `pnpm` — may reorder sections and omit
+`min_version`; match those only when literally copying upstream.)
 
 ```toml
 min_version = "2024.9.5"
@@ -71,25 +73,36 @@ like `pnpm` — omit it; that's fine for those, but new ones should include it.)
     `python = "{{ get_env(name='PYTHON_VERSION', default='3.11') }}"`. Use the
     matching var name per language (`GO_VERSION`, `RUST_VERSION`, `RUBY_VERSION`,
     `NODE_VERSION`, ...). `rust` defaults to `"stable"`.
-- Linters/formatters and helper CLIs **that have a mise backend** are pinned to
+- Linters/formatters and helper CLIs that mise can install are pinned to
     `"latest"` (`golangci-lint = "latest"`, `ruff = "latest"`, `uv = "latest"`).
-    Confirm the name against `mise registry` before adding it.
-- **Package-manager-delivered linters do not go here.** Many ecosystems'
-    canonical linters ship as project dependencies with no mise backend — credo
-    (Hex), ameba (shards), eslint/prettier (npm). Those are installed by the
-    `install` task and called directly in `lint`/`format`; expose their
-    executables with `_.path` (e.g. `_.path = ['{{config_root}}/node_modules/.bin']`
-    or a project `bin` dir) so `lint` resolves them. `ruby-on-rails` (rubocop) and
-    `node` are the reference examples. When unsure whether a tool belongs in
-    `[tools]`: if `mise registry` doesn't list it, it doesn't.
+- **`[tools]` accepts more than registry aliases.** A tool belongs here if mise
+    can install it — that means a registry name *or* an explicit backend spec:
+    `"npm:eslint"`, `"cargo:ripgrep"`, `"pipx:..."`, `"aqua:..."`, `"ubi:..."`.
+    `node.mise.toml` pins `"npm:typescript"`, `"npm:eslint"`, `"npm:jest"` this way
+    even though none are registry aliases. So a missing `mise registry` entry is
+    *not* proof a tool can't go in `[tools]` — check whether a backend can install
+    it. Use `mise registry` to discover the canonical name, not as a gate.
+- **What actually stays out of `[tools]`** are dependencies you'd never install
+    through mise because the language's package manager already resolves them from
+    the project manifest — credo (from `mix.exs`), ameba (from `shard.yml`), or a
+    linter you prefer to run straight out of the project's own `node_modules`.
+    Those are installed by the `install` task and called directly in
+    `lint`/`format`, with the bin dir on `_.path` (e.g.
+    `_.path = ['{{config_root}}/node_modules/.bin']`). `ruby-on-rails` (rubocop) is
+    the reference. Both patterns are valid — mirror the sibling cookbook closest to
+    your ecosystem rather than forcing one rule.
 
 ### Version/env template forms
 
-Two interchangeable ways to inject a default; use each where the existing
-cookbooks do:
+`get_env(...)` and the `env[...] | default(...)` filter are interchangeable ways
+to inject a default. Both work for tool versions and for `[env]` values; mirror
+whatever the closest sibling cookbook uses:
 
-- `get_env(name='FOO_VERSION', default='X')` — the standard form for **tool
-    versions** in `[tools]` (matches every language cookbook).
+- `get_env(name='FOO_VERSION', default='X')` — the most common form for **tool
+    versions** in `[tools]` (most language cookbooks).
+- `env['FOO_VERSION'] | default(value='X')` — the equivalent filter form, also
+    valid for tool versions; `node.mise.toml` pins `node` this way. Mirror
+    whichever form the closest sibling cookbook uses.
 - `env.FOO | default(value='X')` — the filter form used for **`[env]` values**
     like `HOST`, `PORT`, `ENVIRONMENT`, `NODE_ENV` (matches `node`, `uv`).
 
@@ -343,15 +356,24 @@ Modeled on `pnpm.mise.toml` / `uv.mise.toml`. Key traits: `[hooks]` for
 setup, `sources`/`outputs` on the install task for caching, and tasks that
 `depends` on install.
 
+This template highlights only the package-manager-specific pieces; it still needs
+the common skeleton (`min_version`, `[env]` with `PROJECT_NAME`, and `ci` + `info`
+tasks) like every other cookbook. `uv.mise.toml` is the fuller reference;
+`pnpm.mise.toml` is deliberately minimal because it's copied from mise's docs —
+don't treat its omissions as the norm for a new community cookbook.
+
 ```toml
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+_.path = ['{{config_root}}/<bin dir>']
+
 [tools]
 <runtime> = 'X'
 
 [hooks]
 postinstall = '<enable/sync command>'
-
-[env]
-_.path = ['{{config_root}}/<bin dir>']
 
 [tasks.install]
 description = 'Install dependencies'
@@ -363,6 +385,19 @@ outputs = ['<install marker>']
 description = 'Run the dev script'
 run = '<dev command>'
 depends = ['install']
+
+# ...plus test / lint / format as the ecosystem provides, then:
+
+[tasks.ci]
+description = 'Run all checks (lint, test)'
+depends = ['lint', 'test']
+
+[tasks.info]
+description = 'Print project information'
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "<Manager>: $(<manager> --version)"
+'''
 ```
 
 ## Conventions checklist
@@ -372,14 +407,10 @@ Before running `mise run ci`, confirm:
 - [ ] Filename is lowercase, hyphenated: `<tech>.mise.toml`.
 - [ ] `min_version = "2024.9.5"` present.
 - [ ] `[env]` defines `PROJECT_NAME`.
-- [ ] Runtime pinned via `get_env(..., default=...)`; mise-backed linters at
-        `"latest"`.
-- [ ] Every name in `[tools]` verified against `mise registry`;
-        package-manager-delivered linters kept out of `[tools]` and reached via
-        `_.path`.
+- [ ] Runtime pinned via `get_env(...)` or the `env[...] | default(...)` form (mirror the closest sibling); mise-installable linters at `"latest"`.
+- [ ] `[tools]` names are ones mise can install — a registry alias or an explicit backend spec (`npm:`, `cargo:`, ...); manifest-resolved linters kept out and reached via `_.path`.
 - [ ] Tasks have `description`; obvious ones have single-letter `alias`.
-- [ ] `ci` uses `depends`, not `run` (`lint`+`test`, plus a `check` step only if
-        idiomatic).
+- [ ] `ci` uses `depends`, not `run` (`lint`+`test`, plus a `check` step only if idiomatic).
 - [ ] An `info` task echoes project + version facts.
 - [ ] Task `run` commands are the technology's real commands.
 - [ ] README.md has a matching Community Cookbooks bullet.
