@@ -55,6 +55,7 @@ Just copy and paste the contents of the technology-specific `.mise.toml` file in
 - [Litestar](./litestar.mise.toml) :star2: — A cookbook for managing Litestar applications with the Litestar CLI.
 - [PHP](./php.mise.toml) :elephant: — A cookbook for managing PHP projects with Composer and Mago.
 - [Nim](./nim.mise.toml) :lemon: — A cookbook for managing Nim projects with Nimble.
+- [Ruby Gemset](./ruby-gemset.mise.toml) :gem: — A cookbook for RVM-style, project-local gemset isolation in Ruby projects.
 
 ## Contributing :heart:
 

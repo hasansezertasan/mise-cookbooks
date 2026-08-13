@@ -1,0 +1,74 @@
+# Project-local gemset isolation, RVM-style, for Ruby projects.
+#
+# Each project installs and loads gems from its own per-project, per-Ruby
+# directory instead of the global gem home. This keeps every project's gems
+# isolated and reproducible, and puts their executables on PATH so you can call
+# them directly (`rubocop`, `rspec`, ...) without `bundle exec`.
+#
+# Credit: adapted from the mise cookbook discussion:
+# https://github.com/jdx/mise/discussions/3645
+
+min_version = "2024.9.5"
+
+[env]
+# Project information
+PROJECT_NAME = "{{ config_root | basename }}"
+
+# Gems live under `.gems/<active-ruby-version>` so switching Ruby versions
+# never mixes incompatible native extensions. `gem install` and `bundle install`
+# create this directory automatically on first use.
+GEM_HOME = "{{ config_root }}/.gems/{{ exec(command='mise tool ruby --active') }}"
+GEM_PATH = "{{ env.GEM_HOME }}"
+
+# Expose gem-installed executables (rubocop, rspec, ...) on PATH.
+_.path = "{{ env.GEM_HOME }}/bin"
+
+[tools]
+# Install Ruby with the specified version
+ruby = "{{ get_env(name='RUBY_VERSION', default='3.3.3') }}"
+
+[tasks.install]
+description = "Install gem dependencies into the project-local gemset"
+alias = "i"
+run = "bundle install"
+
+[tasks.console]
+description = "Start an IRB console"
+alias = "c"
+run = "irb"
+
+[tasks.run]
+description = "Run the application"
+alias = "r"
+run = "ruby main.rb"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "rake test"
+
+[tasks.lint]
+description = "Lint the code with RuboCop"
+alias = "l"
+run = "rubocop"
+
+[tasks.format]
+description = "Auto-correct offenses with RuboCop"
+alias = "f"
+run = "rubocop --autocorrect"
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
+
+[tasks."gemset:clean"]
+description = "Remove the project-local gemset"
+run = "rm -rf \"{{ config_root }}/.gems\""
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Ruby: $(ruby --version)"
+echo "Gemset (GEM_HOME): $GEM_HOME"
+'''
