@@ -2,7 +2,7 @@
 
 Guidance for agents working in this repository. For the project overview and the
 full cookbook list, see [README.md](./README.md); for dev setup and git hooks,
-see [CONTRIBUTING.md](./CONTRIBUTING.md).
+see [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 ## Cookbook Structure
 
