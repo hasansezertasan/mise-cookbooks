@@ -4,21 +4,24 @@ Several [mise](https://github.com/jdx/mise) setups that I find useful. :sparkles
 
 ## Usage :hammer_and_wrench:
 
-### Use the `micoo` CLI :rocket:
+### Use the `cobo` CLI :rocket:
 
-You can use the `micoo` CLI to interact with the cookbooks.
+You can use the [`cobo`](https://github.com/hasansezertasan/cobo) CLI to interact with the cookbooks.
 
 List all available cookbooks:
 
 ```shell
-mise exec pipx:micoo -- micoo list
+mise exec pipx:cobo -- cobo mise list
 ```
 
-Dump a specific cookbook to your `mise.toml` file:
+Dump a specific cookbook to a file:
 
 ```shell
-mise exec pipx:micoo -- micoo dump <cookbook_name> > mise.toml
+mise exec pipx:cobo -- cobo mise dump <cookbook_name> > mise.local.toml
 ```
+
+> [!NOTE]
+> Redirecting to `mise.local.toml` avoids truncating an existing `mise.toml`.
 
 ### Haters gonna hate but still useful :sunglasses:
 
