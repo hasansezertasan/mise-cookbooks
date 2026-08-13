@@ -52,6 +52,7 @@ Just copy and paste the contents of the technology-specific `.mise.toml` file in
 - [Bun](./bun.mise.toml) :bread: — A cookbook for managing Bun projects with built-in bundler and test runner.
 - [FastAPI](./fastapi.mise.toml) :zap: — A cookbook for managing FastAPI applications with uvicorn.
 - [Flask](./flask.mise.toml) :coffee: — A cookbook for managing Flask web applications.
+- [Litestar](./litestar.mise.toml) :star2: — A cookbook for managing Litestar applications with the Litestar CLI.
 
 ## Contributing :heart:
 
