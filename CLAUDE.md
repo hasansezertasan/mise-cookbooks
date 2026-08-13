@@ -54,11 +54,11 @@ Each cookbook (`*.mise.toml`) follows a consistent pattern:
 | Official (from mise docs) | `terraform`, `cpp`, `node`, `pnpm`, `python`, `ruby-on-rails` |
 | Community | `opentofu`, `go`, `rust`, `zig`, `django`, `deno`, `jupyter`, `bun`, `fastapi`, `flask` |
 
-### Usage via micoo CLI
+### Usage via cobo CLI
 
 ```shell
-mise exec pipx:micoo -- micoo list                    # List cookbooks
-mise exec pipx:micoo -- micoo dump <name> > mise.toml # Export cookbook
+mise exec pipx:cobo -- cobo mise list                    # List cookbooks
+mise exec pipx:cobo -- cobo mise dump <name> > mise.toml # Export cookbook
 ```
 
 ## File Conventions
