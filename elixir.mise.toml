@@ -1,0 +1,60 @@
+min_version = "2024.9.5"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+MIX_ENV = "{{ env.MIX_ENV | default(value='dev') }}"
+
+[tools]
+erlang = "{{ get_env(name='ERLANG_VERSION', default='27') }}"
+elixir = "{{ get_env(name='ELIXIR_VERSION', default='1.18') }}"
+
+[tasks.install]
+description = "Fetch and compile dependencies"
+alias = "i"
+run = "mix deps.get"
+
+[tasks.build]
+description = "Compile the project"
+alias = "b"
+run = "mix compile"
+
+[tasks.run]
+description = "Run the application"
+alias = "r"
+run = "mix run"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "mix test"
+
+[tasks."test:coverage"]
+description = "Run tests with coverage"
+run = "mix test --cover"
+
+[tasks.lint]
+description = "Lint the code with Credo"
+alias = "l"
+run = "mix credo"
+
+[tasks.format]
+description = "Format the code"
+alias = "f"
+run = "mix format"
+
+[tasks.clean]
+description = "Clean build artifacts"
+alias = "c"
+run = "mix clean"
+
+[tasks.ci]
+description = "Run all checks (lint, test)"
+depends = ["lint", "test"]
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Elixir: $(elixir --version)"
+echo "Mix: $(mix --version)"
+'''
