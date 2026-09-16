@@ -299,36 +299,43 @@ url = "https://github.com/tamasfe/taplo/releases/download/0.10.0/taplo-windows-x
 url_api = "https://api.github.com/repos/tamasfe/taplo/releases/assets/257323062"
 
 [[tools.typos]]
-version = "1.45.1"
+version = "1.50.2"
 backend = "aqua:crate-ci/typos"
 
 [tools.typos."platforms.linux-arm64"]
-checksum = "sha256:0d3688c607a49ffb6dedaca6de44e4217abeaa5b93228d673dc5caf76f60489f"
-url = "https://github.com/crate-ci/typos/releases/download/v1.45.1/typos-v1.45.1-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:27c4b6d0ba6f37d120ce32117777d703fc9d57ba71f16e8bcde5b35c987cf9b8"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565799446"
 
 [tools.typos."platforms.linux-arm64-musl"]
-checksum = "sha256:0d3688c607a49ffb6dedaca6de44e4217abeaa5b93228d673dc5caf76f60489f"
-url = "https://github.com/crate-ci/typos/releases/download/v1.45.1/typos-v1.45.1-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:27c4b6d0ba6f37d120ce32117777d703fc9d57ba71f16e8bcde5b35c987cf9b8"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565799446"
 
 [tools.typos."platforms.linux-x64"]
-checksum = "sha256:33447531a0eff29796d6fb9b555b4628723db72c6bad129e168d97ac86ceb0f1"
-url = "https://github.com/crate-ci/typos/releases/download/v1.45.1/typos-v1.45.1-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:abcb3e257c7c2abeff4d903f7fe68071357637605bdb283ce2251f44bc70dc09"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565795694"
 
 [tools.typos."platforms.linux-x64-musl"]
-checksum = "sha256:33447531a0eff29796d6fb9b555b4628723db72c6bad129e168d97ac86ceb0f1"
-url = "https://github.com/crate-ci/typos/releases/download/v1.45.1/typos-v1.45.1-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:abcb3e257c7c2abeff4d903f7fe68071357637605bdb283ce2251f44bc70dc09"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565795694"
 
 [tools.typos."platforms.macos-arm64"]
-checksum = "sha256:2c31ed16286f26c08ae477faf001af8542ff23aeb6e7323be5f620710c192fb5"
-url = "https://github.com/crate-ci/typos/releases/download/v1.45.1/typos-v1.45.1-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:70d61e9d682034133f0aa56f5a02bae0de168495f3cce62a87054aa7186c1901"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565802016"
 
 [tools.typos."platforms.macos-x64"]
-checksum = "sha256:70767b5d8d920cbb17b452a6b068e36e1b3fd649089bce883d3512eb85990326"
-url = "https://github.com/crate-ci/typos/releases/download/v1.45.1/typos-v1.45.1-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:7480a081e51d428d94f560ef8b855ae0decb7c35cc686925ed887c5f51b1ecf1"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565800683"
 
 [tools.typos."platforms.windows-x64"]
-checksum = "sha256:a4ae081cb7a403f2b75e8c066aa4a4484207547c4e9eb2b4df3f68ecdbc5dd3e"
-url = "https://github.com/crate-ci/typos/releases/download/v1.45.1/typos-v1.45.1-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:8474ca8bd72df497b7dee2272345bdea0d4926b18b708faea492fc9bcfd0b0e9"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565798642"
 
 [[tools.yamlfmt]]
 version = "0.21.0"
