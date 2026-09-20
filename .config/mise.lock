@@ -139,43 +139,43 @@ url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/dow
 url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324056"
 
 [[tools."github:akiomik/mado"]]
-version = "0.3.0"
+version = "0.3.2"
 backend = "github:akiomik/mado"
 
 [tools."github:akiomik/mado"."platforms.linux-arm64"]
-checksum = "sha256:ffcdd4845329a69bc729c0242abb6163f23495c0b04dbbaf608cbed43a2f4976"
-url = "https://github.com/akiomik/mado/releases/download/v0.3.0/mado-Linux-gnu-arm64.tar.gz"
-url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/245596215"
+checksum = "sha256:64111976745e939df3d9f18d9912a6b0a0c62aabf571ea1c5eb31ffd111be46a"
+url = "https://github.com/akiomik/mado/releases/download/v0.3.2/mado-Linux-gnu-arm64.tar.gz"
+url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/547404003"
 
 [tools."github:akiomik/mado"."platforms.linux-arm64-musl"]
-checksum = "sha256:ffcdd4845329a69bc729c0242abb6163f23495c0b04dbbaf608cbed43a2f4976"
-url = "https://github.com/akiomik/mado/releases/download/v0.3.0/mado-Linux-gnu-arm64.tar.gz"
-url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/245596215"
+checksum = "sha256:64111976745e939df3d9f18d9912a6b0a0c62aabf571ea1c5eb31ffd111be46a"
+url = "https://github.com/akiomik/mado/releases/download/v0.3.2/mado-Linux-gnu-arm64.tar.gz"
+url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/547404003"
 
 [tools."github:akiomik/mado"."platforms.linux-x64"]
-checksum = "sha256:aad845cd23c8c0417cdf87b8376b75e131c38e1cb890124790567735306de6d7"
-url = "https://github.com/akiomik/mado/releases/download/v0.3.0/mado-Linux-gnu-x86_64.tar.gz"
-url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/245596062"
+checksum = "sha256:3d4993a8c175485a8574706c243cbaeb2a7b4788a9f0deee5eac79a883107726"
+url = "https://github.com/akiomik/mado/releases/download/v0.3.2/mado-Linux-gnu-x86_64.tar.gz"
+url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/547404001"
 
 [tools."github:akiomik/mado"."platforms.linux-x64-musl"]
-checksum = "sha256:aad845cd23c8c0417cdf87b8376b75e131c38e1cb890124790567735306de6d7"
-url = "https://github.com/akiomik/mado/releases/download/v0.3.0/mado-Linux-gnu-x86_64.tar.gz"
-url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/245596062"
+checksum = "sha256:3d4993a8c175485a8574706c243cbaeb2a7b4788a9f0deee5eac79a883107726"
+url = "https://github.com/akiomik/mado/releases/download/v0.3.2/mado-Linux-gnu-x86_64.tar.gz"
+url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/547404001"
 
 [tools."github:akiomik/mado"."platforms.macos-arm64"]
-checksum = "sha256:4000955c41799c839dbf1b4c3011ff1688bd31d0af88be282eec622a07ad9743"
-url = "https://github.com/akiomik/mado/releases/download/v0.3.0/mado-macOS-arm64.tar.gz"
-url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/245596052"
+checksum = "sha256:d3164d15cce56433353873e82973c79b6353a63f0f77cc26befd9924c1e1d7cf"
+url = "https://github.com/akiomik/mado/releases/download/v0.3.2/mado-macOS-arm64.tar.gz"
+url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/547404013"
 
 [tools."github:akiomik/mado"."platforms.macos-x64"]
-checksum = "sha256:b8a3fb5cf3e84747c12a848fb87ce08c1c09dc5a957c1f74733bea6cb7f9d560"
-url = "https://github.com/akiomik/mado/releases/download/v0.3.0/mado-macOS-x86_64.tar.gz"
-url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/245596086"
+checksum = "sha256:672960fd9d563d2c00991ebdadd21d148d50e0cc84aa195849ec78511f9b2610"
+url = "https://github.com/akiomik/mado/releases/download/v0.3.2/mado-macOS-x86_64.tar.gz"
+url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/547404012"
 
 [tools."github:akiomik/mado"."platforms.windows-x64"]
-checksum = "sha256:f79025f931642ea942182aa2717a91af911df122555cd0501c24a1a9bf40e08a"
-url = "https://github.com/akiomik/mado/releases/download/v0.3.0/mado-Windows-msvc-x86_64.zip"
-url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/245597018"
+checksum = "sha256:4d04095cccaad58319ad1094575797dc92d7488413f18099768865e4c47fb8e7"
+url = "https://github.com/akiomik/mado/releases/download/v0.3.2/mado-Windows-msvc-x86_64.zip"
+url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/547403999"
 
 [[tools.hk]]
 version = "2.0.1"
