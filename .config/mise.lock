@@ -199,7 +199,7 @@ checksum = "sha256:cf053945bb446175fa4ce1f28fd9fcf0d24b4548cf7043cdd869249c1ff69
 url = "https://github.com/jdx/hk/releases/download/v1.43.0/hk-x86_64-pc-windows-msvc.zip"
 
 [[tools.markdownlint-cli2]]
-version = "0.22.0"
+version = "0.23.3"
 backend = "npm:markdownlint-cli2"
 
 [[tools.pkl]]
