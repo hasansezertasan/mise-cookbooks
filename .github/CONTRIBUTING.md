@@ -29,6 +29,5 @@ This repo ships a `cookbook-creator` skill under `.claude/skills/` to help agent
 scaffold new cookbooks. That format is currently **Claude Code-specific**.
 
 If you use another AI coding agent (Codex, opencode, Cursor, Copilot, Gemini,
-...), the repository conventions live in [`AGENTS.md`](../AGENTS.md) (mirrored by
-`CLAUDE.md`), which most agents read. You can also follow the skill's guidance
+...), the repository conventions live in [`AGENTS.md`](../AGENTS.md), which most agents read. You can also follow the skill's guidance
 directly by reading `.claude/skills/cookbook-creator/SKILL.md`.
