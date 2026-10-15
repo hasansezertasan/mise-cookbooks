@@ -21,7 +21,7 @@ preinstall = "echo 'I am about to install tool(s)'"
 [tasks."check:editorconfig-checker"]
 description = "Run editorconfig-checker"
 hide = true
-run = "ec --color ."
+run = "editorconfig-checker --color ."
 
 
 [tasks."check:gha"]
