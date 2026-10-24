@@ -50,3 +50,11 @@ indent_size = 2
 
 [**]
 ignore = .git, .vscode, .DS_Store
+
+# cobo-managed files that are not source: cobo.lock is rendered with 2-space TOML
+# tables, and .gitignore keeps the lone CR bytes of the macOS patterns.
+[cobo.lock]
+indent_size = 2
+
+[.gitignore]
+end_of_line = unset
