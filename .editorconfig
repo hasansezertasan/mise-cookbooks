@@ -58,3 +58,6 @@ indent_size = 2
 
 [.gitignore]
 end_of_line = unset
+
+[*.md]
+trim_trailing_whitespace = false
