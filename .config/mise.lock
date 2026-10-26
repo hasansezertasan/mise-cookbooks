@@ -230,7 +230,7 @@ version = "0.23.3"
 backend = "npm:markdownlint-cli2"
 
 [[tools.pkl]]
-version = "0.32.1"
+version = "0.32.2"
 backend = "aqua:apple/pkl"
 
 [tools.pkl."platforms.linux-arm64"]
