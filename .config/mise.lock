@@ -68,7 +68,7 @@ url = "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_
 provenance = "github-attestations"
 
 [[tools.dprint]]
-version = "0.64.0"
+version = "0.64.3"
 backend = "aqua:dprint/dprint"
 
 [tools.dprint."platforms.linux-arm64"]
