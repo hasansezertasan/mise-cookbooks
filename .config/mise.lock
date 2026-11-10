@@ -199,44 +199,44 @@ url = "https://github.com/akiomik/mado/releases/download/v0.4.0/mado-Windows-msv
 url_api = "https://api.github.com/repos/akiomik/mado/releases/assets/680622625"
 
 [[tools.hk]]
-version = "2.11.0"
+version = "2.12.0"
 backend = "aqua:jdx/hk"
 
 [tools.hk."platforms.linux-arm64"]
-checksum = "sha256:49cbba44159c17a760319ccfcca0fe4a07fa716f217c157ea734923160b8acb9"
+checksum = "sha256:0f4e44802c3fcf98461b6608281353ae1944b82fd12f4a683f8e2e6683e562f3"
 checksum_source = "mise-versions"
-url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jdx/hk/releases/assets/698007099"
+url = "https://github.com/jdx/hk/releases/download/v2.12.0/hk-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jdx/hk/releases/assets/728911209"
 
 [tools.hk."platforms.linux-arm64-musl"]
-checksum = "sha256:49cbba44159c17a760319ccfcca0fe4a07fa716f217c157ea734923160b8acb9"
+checksum = "sha256:0f4e44802c3fcf98461b6608281353ae1944b82fd12f4a683f8e2e6683e562f3"
 checksum_source = "mise-versions"
-url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jdx/hk/releases/assets/698007099"
+url = "https://github.com/jdx/hk/releases/download/v2.12.0/hk-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jdx/hk/releases/assets/728911209"
 
 [tools.hk."platforms.linux-x64"]
-checksum = "sha256:a461eb97df8e60c4447d1fdaa74a3d31598d7aba0d7a68ceebad0ff0405c3b5b"
+checksum = "sha256:db98f893b882f064c1f7abcc96f4ccc31e8154fd1ba0f7f94823d371c2c4fdad"
 checksum_source = "mise-versions"
-url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jdx/hk/releases/assets/698007144"
+url = "https://github.com/jdx/hk/releases/download/v2.12.0/hk-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jdx/hk/releases/assets/728911276"
 
 [tools.hk."platforms.linux-x64-musl"]
-checksum = "sha256:a461eb97df8e60c4447d1fdaa74a3d31598d7aba0d7a68ceebad0ff0405c3b5b"
+checksum = "sha256:db98f893b882f064c1f7abcc96f4ccc31e8154fd1ba0f7f94823d371c2c4fdad"
 checksum_source = "mise-versions"
-url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/jdx/hk/releases/assets/698007144"
+url = "https://github.com/jdx/hk/releases/download/v2.12.0/hk-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jdx/hk/releases/assets/728911276"
 
 [tools.hk."platforms.macos-arm64"]
-checksum = "sha256:65cc3490e93522b55abe8ae42c2b5ffe452f9fe58282455ad59d10bc0deab272"
+checksum = "sha256:269c17d47e884c19adb77144d5957e854fc5fc6a1a6f9c1a0a5b19431e2fabb8"
 checksum_source = "mise-versions"
-url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/jdx/hk/releases/assets/698007103"
+url = "https://github.com/jdx/hk/releases/download/v2.12.0/hk-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/jdx/hk/releases/assets/728911206"
 
 [tools.hk."platforms.windows-x64"]
-checksum = "sha256:cb62de9ffb3d8265c513f194769c7b5575671f7bbfad3fab9529db54a0a32e14"
+checksum = "sha256:052f2ea36dc679cae7fbbd57f75c2b4e5c4cd7bb6711f7bf6b9a147524ffe9f9"
 checksum_source = "mise-versions"
-url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/jdx/hk/releases/assets/698007111"
+url = "https://github.com/jdx/hk/releases/download/v2.12.0/hk-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/jdx/hk/releases/assets/728911213"
 
 [[tools.markdownlint-cli2]]
 version = "0.23.3"
