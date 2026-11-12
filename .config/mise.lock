@@ -239,7 +239,7 @@ url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-x86_64-pc-windows-
 url_api = "https://api.github.com/repos/jdx/hk/releases/assets/698007111"
 
 [[tools.markdownlint-cli2]]
-version = "0.23.3"
+version = "0.24.1"
 backend = "npm:markdownlint-cli2"
 
 [[tools.pkl]]
